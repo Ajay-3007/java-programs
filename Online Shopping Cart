@@ -1,0 +1,95 @@
+// File: OnlineShoppingCart.java
+// Console-based Online Shopping Cart in Java
+// Author: Ajay Kumar
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+// Product class
+class Product {
+    private String name;
+    private double price;
+
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() { return name; }
+    public double getPrice() { return price; }
+
+    public void display() {
+        System.out.println(name + " - ₹" + price);
+    }
+}
+
+// Shopping Cart class
+class ShoppingCart {
+    private ArrayList<Product> cart = new ArrayList<>();
+
+    public void addProduct(Product p) {
+        cart.add(p);
+        System.out.println("✅ " + p.getName() + " added to cart.");
+    }
+
+    public void removeProduct(String name) {
+        boolean removed = cart.removeIf(p -> p.getName().equalsIgnoreCase(name));
+        if (removed) System.out.println("✅ " + name + " removed from cart.");
+        else System.out.println("❌ Product not found in cart.");
+    }
+
+    public void viewCart() {
+        if (cart.isEmpty()) {
+            System.out.println("🛒 Cart is empty.");
+            return;
+        }
+        System.out.println("\n=== Your Cart ===");
+        double total = 0;
+        for (Product p : cart) {
+            p.display();
+            total += p.getPrice();
+        }
+        System.out.println("Total: ₹" + total);
+    }
+}
+
+// Main application
+public class OnlineShoppingCart {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ShoppingCart cart = new ShoppingCart();
+        int choice;
+
+        System.out.println("=== Online Shopping Cart ===");
+
+        do {
+            System.out.println("\n1. Add Product");
+            System.out.println("2. Remove Product");
+            System.out.println("3. View Cart");
+            System.out.println("0. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+            sc.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1 -> {
+                    System.out.print("Enter Product Name: ");
+                    String name = sc.nextLine();
+                    System.out.print("Enter Product Price: ");
+                    double price = sc.nextDouble();
+                    cart.addProduct(new Product(name, price));
+                }
+                case 2 -> {
+                    System.out.print("Enter Product Name to Remove: ");
+                    String name = sc.nextLine();
+                    cart.removeProduct(name);
+                }
+                case 3 -> cart.viewCart();
+                case 0 -> System.out.println("👋 Exiting Shopping Cart...");
+                default -> System.out.println("❌ Invalid choice, try again.");
+            }
+        } while (choice != 0);
+
+        sc.close();
+    }
+}
