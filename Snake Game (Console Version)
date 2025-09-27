@@ -1,0 +1,83 @@
+// File: SnakeGame.java
+// Simple Console-based Snake Game in Java
+// Author: Ajay Kumar
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class SnakeGame {
+    static int width = 20;
+    static int height = 10;
+    static int x, y, fruitX, fruitY, score;
+    static boolean gameOver;
+    static char direction = 'R';
+    static Random rand = new Random();
+    static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        setup();
+        while (!gameOver) {
+            draw();
+            input();
+            logic();
+        }
+        System.out.println("💀 Game Over! Final Score: " + score);
+    }
+
+    static void setup() {
+        gameOver = false;
+        x = width / 2;
+        y = height / 2;
+        fruitX = rand.nextInt(width);
+        fruitY = rand.nextInt(height);
+        score = 0;
+    }
+
+    static void draw() {
+        System.out.println("\nScore: " + score);
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (i == 0 || i == height - 1 || j == 0 || j == width - 1) {
+                    System.out.print("#"); // Border
+                } else if (i == y && j == x) {
+                    System.out.print("O"); // Snake head
+                } else if (i == fruitY && j == fruitX) {
+                    System.out.print("*"); // Fruit
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    static void input() {
+        System.out.println("Enter direction (W=Up, S=Down, A=Left, D=Right, Q=Quit): ");
+        char c = sc.next().toUpperCase().charAt(0);
+        if (c == 'W' || c == 'A' || c == 'S' || c == 'D' || c == 'Q') {
+            direction = c;
+        }
+        if (direction == 'Q') gameOver = true;
+    }
+
+    static void logic() {
+        switch (direction) {
+            case 'W' -> y--;
+            case 'S' -> y++;
+            case 'A' -> x--;
+            case 'D' -> x++;
+        }
+
+        // Collision with walls
+        if (x <= 0 || x >= width - 1 || y <= 0 || y >= height - 1) {
+            gameOver = true;
+        }
+
+        // Eating fruit
+        if (x == fruitX && y == fruitY) {
+            score += 10;
+            fruitX = rand.nextInt(width - 2) + 1;
+            fruitY = rand.nextInt(height - 2) + 1;
+        }
+    }
+}
