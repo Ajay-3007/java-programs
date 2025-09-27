@@ -1,0 +1,53 @@
+// File: StudentRecordSystem.java
+// Simple Student Record Management using OOP
+// Author: Ajay Kumar
+
+import java.util.Scanner;
+
+class Student {
+    private String name;
+    private int rollNo;
+    private double marks;
+
+    public Student(String name, int rollNo, double marks) {
+        this.name = name;
+        this.rollNo = rollNo;
+        this.marks = marks;
+    }
+
+    public void displayDetails() {
+        System.out.println("\n--- Student Details ---");
+        System.out.println("Name: " + name);
+        System.out.println("Roll No: " + rollNo);
+        System.out.println("Marks: " + marks);
+        System.out.println("Grade: " + getGrade());
+    }
+
+    private String getGrade() {
+        if (marks >= 90) return "A+";
+        else if (marks >= 75) return "A";
+        else if (marks >= 60) return "B";
+        else if (marks >= 50) return "C";
+        else return "F";
+    }
+}
+
+public class StudentRecordSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter student name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter roll number: ");
+        int rollNo = sc.nextInt();
+
+        System.out.print("Enter marks: ");
+        double marks = sc.nextDouble();
+
+        Student student = new Student(name, rollNo, marks);
+        student.displayDetails();
+
+        sc.close();
+    }
+}
