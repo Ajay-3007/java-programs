@@ -1,0 +1,57 @@
+// File: QuizApplication.java
+// Console-based Quiz Application in Java
+// Author: Ajay Kumar
+
+import java.util.Scanner;
+
+class Question {
+    String question;
+    String[] options;
+    int answer; // index of correct option
+
+    public Question(String question, String[] options, int answer) {
+        this.question = question;
+        this.options = options;
+        this.answer = answer;
+    }
+
+    public boolean askQuestion(Scanner sc) {
+        System.out.println("\n" + question);
+        for (int i = 0; i < options.length; i++) {
+            System.out.println((i + 1) + ". " + options[i]);
+        }
+        System.out.print("Enter your choice (1-" + options.length + "): ");
+        int choice = sc.nextInt();
+        return choice == answer;
+    }
+}
+
+public class QuizApplication {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Question[] questions = {
+            new Question("What is the capital of India?",
+                    new String[]{"Delhi", "Mumbai", "Kolkata", "Chennai"}, 1),
+            new Question("Which language is used for Android app development?",
+                    new String[]{"Python", "Java", "C++", "Swift"}, 2),
+            new Question("What is 5 + 7?",
+                    new String[]{"10", "11", "12", "13"}, 3)
+        };
+
+        int score = 0;
+        System.out.println("=== Quiz Application ===");
+
+        for (Question q : questions) {
+            if (q.askQuestion(sc)) {
+                System.out.println("✅ Correct!");
+                score++;
+            } else {
+                System.out.println("❌ Wrong!");
+            }
+        }
+
+        System.out.println("\n🎉 Quiz Completed! Your Score: " + score + "/" + questions.length);
+        sc.close();
+    }
+}
