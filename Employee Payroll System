@@ -1,0 +1,55 @@
+// File: EmployeePayrollSystem.java
+// Simple Employee Payroll System in Java
+// Author: Ajay Kumar
+
+import java.util.Scanner;
+
+class Employee {
+    private String name;
+    private int id;
+    private double basicSalary;
+
+    public Employee(String name, int id, double basicSalary) {
+        this.name = name;
+        this.id = id;
+        this.basicSalary = basicSalary;
+    }
+
+    public double calculateNetSalary() {
+        double hra = basicSalary * 0.2;       // House Rent Allowance
+        double da = basicSalary * 0.1;        // Dearness Allowance
+        double tax = basicSalary * 0.05;      // Tax deduction
+        return basicSalary + hra + da - tax;
+    }
+
+    public void displayDetails() {
+        System.out.println("\n--- Employee Details ---");
+        System.out.println("ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Basic Salary: ₹" + basicSalary);
+        System.out.println("Net Salary: ₹" + calculateNetSalary());
+    }
+}
+
+public class EmployeePayrollSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("=== Employee Payroll System ===");
+
+        System.out.print("Enter Employee ID: ");
+        int id = sc.nextInt();
+        sc.nextLine(); // consume newline
+
+        System.out.print("Enter Employee Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Basic Salary: ");
+        double basicSalary = sc.nextDouble();
+
+        Employee emp = new Employee(name, id, basicSalary);
+        emp.displayDetails();
+
+        sc.close();
+    }
+}
