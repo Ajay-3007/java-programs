@@ -1,0 +1,74 @@
+// File: TemperatureConverter.java
+// Program to convert temperatures between Celsius, Fahrenheit, and Kelvin
+// Author: Ajay Kumar
+
+import java.util.Scanner;
+
+public class TemperatureConverter {
+
+    // Convert Celsius to Fahrenheit
+    static double celsiusToFahrenheit(double c) {
+        return (c * 9 / 5) + 32;
+    }
+
+    // Convert Celsius to Kelvin
+    static double celsiusToKelvin(double c) {
+        return c + 273.15;
+    }
+
+    // Convert Fahrenheit to Celsius
+    static double fahrenheitToCelsius(double f) {
+        return (f - 32) * 5 / 9;
+    }
+
+    // Convert Kelvin to Celsius
+    static double kelvinToCelsius(double k) {
+        return k - 273.15;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int choice;
+
+        System.out.println("=== Temperature Converter ===");
+
+        do {
+            System.out.println("\nChoose conversion:");
+            System.out.println("1. Celsius to Fahrenheit");
+            System.out.println("2. Celsius to Kelvin");
+            System.out.println("3. Fahrenheit to Celsius");
+            System.out.println("4. Kelvin to Celsius");
+            System.out.println("0. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1 -> {
+                    System.out.print("Enter Celsius: ");
+                    double c = sc.nextDouble();
+                    System.out.println("✅ Fahrenheit: " + celsiusToFahrenheit(c));
+                }
+                case 2 -> {
+                    System.out.print("Enter Celsius: ");
+                    double c = sc.nextDouble();
+                    System.out.println("✅ Kelvin: " + celsiusToKelvin(c));
+                }
+                case 3 -> {
+                    System.out.print("Enter Fahrenheit: ");
+                    double f = sc.nextDouble();
+                    System.out.println("✅ Celsius: " + fahrenheitToCelsius(f));
+                }
+                case 4 -> {
+                    System.out.print("Enter Kelvin: ");
+                    double k = sc.nextDouble();
+                    System.out.println("✅ Celsius: " + kelvinToCelsius(k));
+                }
+                case 0 -> System.out.println("👋 Exiting...");
+                default -> System.out.println("❌ Invalid choice, try again.");
+            }
+
+        } while (choice != 0);
+
+        sc.close();
+    }
+}
