@@ -1,0 +1,60 @@
+// File: CurrencyConverter.java
+// Console-based Currency Converter in Java
+// Author: Ajay Kumar
+
+import java.util.Scanner;
+
+public class CurrencyConverter {
+
+    // Conversion rates (example rates)
+    static final double INR_TO_USD = 0.012;
+    static final double INR_TO_EUR = 0.011;
+    static final double USD_TO_INR = 82.5;
+    static final double EUR_TO_INR = 90.0;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        double amount;
+
+        System.out.println("=== Currency Converter ===");
+
+        do {
+            System.out.println("\n1. INR to USD");
+            System.out.println("2. INR to EUR");
+            System.out.println("3. USD to INR");
+            System.out.println("4. EUR to INR");
+            System.out.println("0. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1 -> {
+                    System.out.print("Enter amount in INR: ");
+                    amount = sc.nextDouble();
+                    System.out.println("✅ " + amount + " INR = " + (amount * INR_TO_USD) + " USD");
+                }
+                case 2 -> {
+                    System.out.print("Enter amount in INR: ");
+                    amount = sc.nextDouble();
+                    System.out.println("✅ " + amount + " INR = " + (amount * INR_TO_EUR) + " EUR");
+                }
+                case 3 -> {
+                    System.out.print("Enter amount in USD: ");
+                    amount = sc.nextDouble();
+                    System.out.println("✅ " + amount + " USD = " + (amount * USD_TO_INR) + " INR");
+                }
+                case 4 -> {
+                    System.out.print("Enter amount in EUR: ");
+                    amount = sc.nextDouble();
+                    System.out.println("✅ " + amount + " EUR = " + (amount * EUR_TO_INR) + " INR");
+                }
+                case 0 -> System.out.println("👋 Exiting Currency Converter...");
+                default -> System.out.println("❌ Invalid choice, try again.");
+            }
+
+        } while (choice != 0);
+
+        sc.close();
+    }
+}
