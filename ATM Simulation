@@ -1,0 +1,110 @@
+// File: ATM.java
+// A simple ATM Simulation in Java
+// Author: Ajay Kumar
+
+import java.util.Scanner;
+
+// BankAccount class to represent an account
+class BankAccount {
+    private String accountHolder;
+    private String accountNumber;
+    private double balance;
+    private String pin;
+
+    // Constructor
+    public BankAccount(String accountHolder, String accountNumber, String pin, double initialBalance) {
+        this.accountHolder = accountHolder;
+        this.accountNumber = accountNumber;
+        this.pin = pin;
+        this.balance = initialBalance;
+    }
+
+    // PIN validation
+    public boolean validatePin(String inputPin) {
+        return pin.equals(inputPin);
+    }
+
+    // Deposit money
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("✅ ₹" + amount + " deposited successfully.");
+        } else {
+            System.out.println("❌ Invalid deposit amount!");
+        }
+    }
+
+    // Withdraw money
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("✅ ₹" + amount + " withdrawn successfully.");
+        } else {
+            System.out.println("❌ Insufficient balance or invalid amount!");
+        }
+    }
+
+    // Check balance
+    public double getBalance() {
+        return balance;
+    }
+
+    // Display account details
+    public void displayDetails() {
+        System.out.println("\n👤 Account Holder: " + accountHolder);
+        System.out.println("🏦 Account Number: " + accountNumber);
+        System.out.println("💰 Current Balance: ₹" + balance);
+    }
+}
+
+// ATM Simulation class
+public class ATM {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Create a sample account
+        BankAccount account = new BankAccount("Ajay Kumar", "ACC123456", "1234", 5000.0);
+
+        // Login process
+        System.out.println("=== Welcome to the ATM ===");
+        System.out.print("Enter PIN: ");
+        String enteredPin = sc.nextLine();
+
+        if (!account.validatePin(enteredPin)) {
+            System.out.println("❌ Invalid PIN. Access Denied.");
+            sc.close();
+            return;
+        }
+
+        int choice;
+        do {
+            System.out.println("\n=== ATM Menu ===");
+            System.out.println("1. Deposit");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Check Balance");
+            System.out.println("4. Account Details");
+            System.out.println("0. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1 -> {
+                    System.out.print("Enter amount to deposit: ");
+                    double depositAmount = sc.nextDouble();
+                    account.deposit(depositAmount);
+                }
+                case 2 -> {
+                    System.out.print("Enter amount to withdraw: ");
+                    double withdrawAmount = sc.nextDouble();
+                    account.withdraw(withdrawAmount);
+                }
+                case 3 -> System.out.println("💰 Balance: ₹" + account.getBalance());
+                case 4 -> account.displayDetails();
+                case 0 -> System.out.println("👋 Thank you for using the ATM!");
+                default -> System.out.println("❌ Invalid choice, try again.");
+            }
+        } while (choice != 0);
+
+        sc.close();
+    }
+}
