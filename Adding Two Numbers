@@ -1,0 +1,29 @@
+// File: Twonumsum.java
+// Simple program to add two integers
+// Author: Ajay Kumar
+
+import java.util.Scanner;
+
+public class Twonumsum {
+
+    // Method to add two numbers
+    static int Twonumsum(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        int a = in.nextInt();
+
+        System.out.print("Enter second number: ");
+        int b = in.nextInt();
+
+        int sum = solveMeFirst(a, b);
+
+        System.out.println("Sum = " + sum);
+
+        in.close();
+    }
+}
