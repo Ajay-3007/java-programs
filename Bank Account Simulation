@@ -1,7 +1,6 @@
 // File: BankApplication.java
 // A simple Bank Account Simulation in Java
 // Author: Ajay Kumar
-// Suitable for GitHub portfolio
 
 import java.util.Scanner;
 
